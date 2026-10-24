@@ -1,0 +1,69 @@
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+
+# Python & Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+build/
+dist/
+develop-eggs/
+eggs/
+parts/
+bin/
+var/
+sdist/
+wheels/
+
+# Testing & Linting
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.cache/
+
+# Database & Storage
+db/*.sql
+db/*.dump
+!db/seed.sql
+*.sqlite
+*.sqlite3
+*.db
+db_data/
+
+# Docker local overrides
+docker-compose.override.yml
+
+# Static product media assets (avoid committing large product images)
+static/products/*.jpg
+static/products/*.jpeg
+static/products/*.png
+static/products/*.webp
+!static/products/.gitkeep
+
+# Logs
+*.log
+logs/
+
+# macOS & Editor files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.idea/
+.vscode/
+*.sw?
+*~
