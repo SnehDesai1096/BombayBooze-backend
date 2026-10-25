@@ -1,10 +1,24 @@
 from datetime import date, datetime
 from decimal import Decimal
-from sqlalchemy import TIMESTAMP, Boolean, Date, ForeignKey, Numeric, SmallInteger, String, Text, func, text
+from sqlalchemy import TIMESTAMP, Boolean, Date, ForeignKey, Numeric, SmallInteger, String, Text, func, text, DateTime
 from sqlalchemy.dialects.mysql import INTEGER
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .database import Base
 
+
+class PasswordResetToken(Base):
+    __tablename__ = "password_reset_token"
+
+    token_id: Mapped[int] = mapped_column(INTEGER(unsigned=True), primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(
+        INTEGER(unsigned=True),
+        ForeignKey("users.user_id", ondelete="CASCADE"),
+        index=True,
+    )
+    token_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime)            # stored in UTC
+    used_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(TIMESTAMP, server_default=func.now())
 
 class User(Base):
     __tablename__ = "users"

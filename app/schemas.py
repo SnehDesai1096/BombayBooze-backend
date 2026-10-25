@@ -11,11 +11,25 @@ class SignupRequest(BaseModel):
     date_of_birth: date
     phone: str | None = Field(default=None, max_length=20)
 
+class ChangePasswordRequest(BaseModel):
+    current_password: str
+    new_password: str = Field(min_length=8, max_length=64)
 
 class LoginRequest(BaseModel):
     email: EmailStr
     password: str
 
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr
+
+
+class ResetPasswordRequest(BaseModel):
+    token: str = Field(min_length=20, max_length=200)
+    new_password: str = Field(min_length=8, max_length=64)
+
+
+class MessageResponse(BaseModel):
+    message: str
 
 class TokenResponse(BaseModel):
     access_token: str
